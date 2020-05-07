@@ -1,0 +1,33 @@
+<div class="col-sm-7 col-md-6"></div>
+    <div v-if="integrationId != 0" class="card mx-4 pt-2" style="margin-top:20px;">
+        <img class="card-img-top integration-logo" :src="selectedIntegration" style="cursor: pointer" @click="changeLogo" data-toggle="tooltip" title="Change Logo" draggable="false" />
+        <div id="chgLogo" class="hidden">
+            <div class="container" style="border:1px solid red; width:200px;">   
+                <form method="post" enctype="multipart/form-data">
+                    <div class="dmiux_grid-row">
+                        <div class="dmiux_grid-col dmiux_grid-col_auto" style="text-align:center;">
+                            <div class="dmiux_button button_nom dmiux_button_secondary mb-2" style="display:inline-block">Choose File
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16"><path fill="currentColor" d="M3 5v4c0 1.7 1.3 3 3 3s3-1.3 3-3V4.5C9 2 7 0 4.5 0S0 2 0 4.5V10c0 3.3 2.7 6 6 6s6-2.7 6-6V4h-2v6c0 2.2-1.8 4-4 4s-4-1.8-4-4V4.5C2 3.1 3.1 2 4.5 2S7 3.1 7 4.5V9c0 .6-.4 1-1 1s-1-.4-1-1V5H3z"></path></svg> -->
+                                <input type="file" @change="onFileChange" name="fileToUpload" id="fileToUpload" />
+                            </div>
+                            <div style="display:inline-block">
+                                <input type="text" readonly="readonly" value="" style="width:168px; text-align:center;">
+                            </div>
+                            <button style="display:inline-block" class="btn btn-sm btn-success" @click.prevent="uploadLogo(logo.id)">Upload</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            <database-creation-wizard 
+                :integration_details="integration_details" 
+                :wizard_form="wizard_form"
+                :servers="servers">
+            </database-creation-wizard>
+        </div>
+    </div>
+    <div v-else class="mx-4 mt-2" style="margin-top:20px;">
+        <img class="img-fluid" src="/assets/images/integration_illustration.png" draggable="false" />
+    </div>
+</div>

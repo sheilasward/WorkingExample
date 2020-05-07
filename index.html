@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .demo {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        display: inline-block;
+        margin: 10px;
+    }
+    .red {
+        background-color: red;
+    }
+    .green {
+        background-color: green;
+    }
+    .blue {
+        background-color: blue;
+    }
+</style>
+<body>
+    
+    <div id="app">
+        <button @click="showAlert">Show Alert</button>
+        <button @click="increase(2, $event)">Click Me</button>
+        <p>{{ counter }}</p>
+        <p @mousemove="updateCoordinates">
+            Coordinates:  {{ x }} / {{ y }}
+            -- <span @mousemove.stop="">DEAD SPOT</span>
+        </p>
+        <div>
+            <span>
+                <input type="text" @keyup="value = $event.target.value"> &emsp;When you type input, with every keyup, the contents of the box will appear below:
+            </span>
+            <p>{{ value }}</p>
+        </div>
+
+        <div>
+            <span>
+                <input type="text" @keydown.enter="value2 = $event.target.value"> &emsp;When you enter, the contents of the box will appear below:
+            </span>
+            <p>{{ value2 }}</p>
+        </div>
+        <div>
+            <span>
+                <input type="text" v-model="name"> &emsp;By using v-model, contents of the box will appear below, every time input is changed:
+            </span>
+            <p>{{ name }}</p>
+        </div>
+        <hr>
+        <div 
+            class="demo" 
+            @click="attachRed = !attachRed"
+            :class="divClasses">
+        </div>
+
+        <div 
+            class="demo"
+            :class="{'red': attachRed}">
+        </div>
+
+        <div 
+            class="demo"
+            :class="[color, {red: attachRed}]">
+        </div>
+
+        <hr>
+        <input type="text" v-model="color"> &emsp;
+        <p>
+        Click on first square, and it will turn both it and the 2nd square red.
+        Click on it again, and the first will turn back to blue, and the 2nd to gray.
+        </p>
+        <p>
+        Click on the 2nd square and it does nothing.
+        </p>
+        <p>
+        In the input box, type red, green, or blue, and the 3rd square will turn that color.
+        Delete the text in the input box, and toggle the 1st square until red, and the 3rd square will also turn red.
+        </p>
+        <hr>
+        <div 
+            class="demo"
+            :style="{backgroundColor: color2}">
+        </div>
+        <div
+            class="demo"
+            :style="myStyle">
+        </div>
+        <div
+            class="demo"
+            :style="[myStyle, {height: width + 'px'}]">
+        </div>
+        <hr>
+        <input type="text" v-model="color2">
+        <input type="text" v-model="width">
+        <p>
+            In the first input box type red, green, or blue, and both squares will turn that color.
+        </p>
+        <p>
+            In the second input box type a number, and the second and third squares will change their width to that number of pixels.<br>
+            The third square will also change its height to be the same as the width from the 2nd input box.
+        </p>
+        <hr>
+
+        <button @click="countr++">Increase</button>
+        <button @click="countr--">Decrease</button>
+        <span> | </span>
+        <button @click="secondCountr++">Increase 2nd</button>
+        <button @click="secondCountr--">Decrease 2nd</button>
+        <span> | </span>
+        <button @click="thirdCountr++">Increase 3rd</button>
+        <button @click="thirdCountr--">Decrease 3rd</button>
+        <p>Counter: {{ countr }} | {{ secondCountr }} | {{ thirdCountr }}</p>
+        <p>Result: {{ result() }} | {{ output }} | {{ resultForThird }}</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
